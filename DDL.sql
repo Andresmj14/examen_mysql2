@@ -17,7 +17,7 @@ FOREIGN KEY (id_pais) REFERENCES pais(id_pais)
 );
 
 CREATE TABLE direccion(
-id_direccion SMALLINT(11) AUTO_INCREMENT PRIMARY KEY,
+id_direccion SMALLINT(11) PRIMARY KEY,
 direccion VARCHAR(50),
 direccion2 VARCHAR(50),
 distrito VARCHAR(20),
@@ -28,7 +28,7 @@ ultima_actualizacion TIMESTAMP,
 FOREIGN KEY (id_ciudad) REFERENCES ciudad(id_ciudad)
 );
 CREATE TABLE empleado(
-id_empleado SMALLINT(11) AUTO_INCREMENT PRIMARY KEY,
+id_empleado SMALLINT(11) PRIMARY KEY,
 nombre VARCHAR(45),
 apellidos VARCHAR(45),
 id_direccion SMALLINT(11),
@@ -53,7 +53,7 @@ id_almacen TINYINT,
 id_empleado SMALLINT,
 ultima_actualizacion TIMESTAMP,
 FOREIGN KEY (id_almacen) REFERENCES almacen(id_almacen),
-FOREIGN KEY (empleado) REFERENCES empleado(id_empleado)
+FOREIGN KEY (id_empleado) REFERENCES empleado(id_empleado)
 );
 
 CREATE TABLE cliente(
@@ -77,7 +77,7 @@ ultima_actualizacion TIMESTAMP
 
 CREATE TABLE pelicula(
 id_pelicula SMALLINT PRIMARY KEY,
-titulo VARCHAR(255)    ,
+titulo VARCHAR(255),
 descripcion TEXT,
 anyo_lanzamiento YEAR,
 id_idioma TINYINT,
@@ -86,8 +86,8 @@ duracion_alquiler TINYINT,
 rental_date DECIMAL(4,2),
 duracion SMALLINT,
 replacement_cost DECIMAL(5,2),
-clasificacion ENUM('G', 'PG','PG-13', 'R', 'NC-17')
-caracteristicas_especiales SET('Trailers', 'Commentaries','Deleted Scenes', 'Behid the scenes'),
+clasificacion ENUM('G', 'PG','PG-13', 'R', 'NC-17'),
+caracteristicas_especiales SET('Trailers','Commentaries','Deleted Scenes','Behind the scenes'),
 ultima_actualizacion TIMESTAMP,
 FOREIGN KEY (id_idioma) REFERENCES idioma(id_idioma)
 );
@@ -130,24 +130,23 @@ FOREIGN KEY (id_pelicula) REFERENCES pelicula(id_pelicula),
 FOREIGN KEY (id_almacen) REFERENCES almacen(id_almacen)
 );
 CREATE TABLE alquiler(
-id_alquiler INT PRIMARY KEY   
+id_alquiler INT PRIMARY KEY,   
 fecha_alquiler DATETIME,
 id_inventario MEDIUMINT,
 id_cliente SMALLINT,
-fecha_devoluciom DATETIME,
-id_empleado TINYINT,
+fecha_devolucion DATETIME,
+id_empleado SMALLINT,
 ultima_actualizacion TIMESTAMP,
 FOREIGN KEY (id_inventario)  REFERENCES inventario(id_inventario),
-FOREIGN KEY (id_emmpleado) REFENRECES empleado(id_empleado),
+FOREIGN KEY (id_empleado) REFERENCES empleado(id_empleado),
 FOREIGN KEY (id_cliente) REFERENCES cliente(id_cliente)
-
 );
 
 
 CREATE TABLE pago(
 id_pago SMALLINT PRIMARY KEY,
 id_cliente SMALLINT,
-id_empleado TINYINT,
+id_empleado SMALLINT,
 id_alquiler INT,
 total DECIMAL(5,2),
 fecha_pago DATETIME,
