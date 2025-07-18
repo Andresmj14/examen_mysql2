@@ -17,7 +17,7 @@ FOREIGN KEY (id_pais) REFERENCES pais(id_pais)
 );
 
 CREATE TABLE direccion(
-id_direccion SMALLINT(11) PRIMARY KEY,
+id_direccion SMALLINT PRIMARY KEY,
 direccion VARCHAR(50),
 direccion2 VARCHAR(50),
 distrito VARCHAR(20),
